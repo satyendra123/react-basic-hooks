@@ -1,0 +1,28 @@
+props = > when react sees an element representing a user defined component, it passes jsx attribute to this component as a single object. we call this object "props" so parent se child me data send karne ke liye yaa phir ek component se dusre component me data sends
+          karne ke liye hum iska istemal karte hai
+
+import React from 'react';
+
+const Student = (data) =>{
+  return(
+    <>
+      <div>
+        <h1>My information</h1>
+        <p>{JSON.stringify(data)}</p>
+      </div>
+    </>
+    )
+}
+
+const App = () =>{
+  return(
+    <>
+      <div>
+        <h1>this is my main App.js</h1>
+        <h1>this wll be run first</h1>
+        <Student name="satyendra" roll="121" grade="5th" city="Madhaya Pradesh" />
+      </div>
+    </>
+    )
+}
+export default App
