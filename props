@@ -95,4 +95,70 @@ const App = () => {
 
 export default App;
 
-Note- isme to hum simply kya kar rhe the ki hume data send karna tha 
+Note- isme to hum simply kya kar rhe the ki hume data send karna tha parents se child me to hum direct aise send kar sakte hai. lekin man lo ki mujhe siblings me data send karna hai to uske liye kya approach hai
+so uske liye hum use karte hai stateup. means pahle hum us data ko pahle app.js tak pahuchanyenge aur usme bad me hum us data ko dusre child me bhejnge. so man lo hume Student.jsx se data ko send karna hai Teacher.js me to hume
+App.js me ek state banana hoga aur us state ki madad se hum us data ko chld wale me send karenge
+
+a) App.js
+import Student from "./Components/Student.js";
+import Teacher from "./Components/Teacher.js";
+import { useState } from "react";
+const App = () => {
+  const [studentData, setStudentData] = useState({});
+
+  return (
+    <>
+      <div>
+        <Student setdata={setStudentData} />
+        <Teacher data={studentData} />
+      </div>
+    </>
+  );
+};
+export default App;
+
+
+b) Studet.js
+import React, { useEffect } from "react";
+
+const Student = ({ setdata }) => {
+  
+  const data = {
+    name: "satyendra",
+    class: "8th",
+    age: "26",
+  };
+
+  useEffect(() => {
+    setdata(data);
+  }, []);
+
+  return (
+    <>
+      <div>
+        <h1>My information</h1>
+      </div>
+    </>
+  );
+};
+export default Student;
+
+c) Teacher.js
+const Teacher = ({ data }) => {
+  return (
+    <>
+      <h1>kya kar rha hai be</h1>
+      <p>{JSON.stringify(data)}</p>
+      <p>{data.name}</p>
+      <p>{data.class}</p>
+      <p>{data.age}</p>
+    </>
+  );
+};
+export default Teacher;
+
+
+Note- so basically hum ek state banate hai aur jo humara function hota hai use hum send karte hai jaha se hume data send karna rhta hai jaise ki abhi hume student me se data send karna hai
+to usme jakar useEffect lagakar us function me data ko pass kara denge so isse ye hoga ki humara variable bhi update ho jayega App.js me is function ki wajah se aur hum is variable ko Teacher.js me send kar denge
+
+
