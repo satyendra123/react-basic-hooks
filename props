@@ -8,6 +8,10 @@ const Student = (data) =>{       // humne isme (data) likha hai
     <>
       <div>
         <h1>My information</h1>
+        <p>{data.name}</p>
+        <p>{data.roll}</p>
+        <p>{data.grade}</p>
+        <p>{data.city}</p>
         <p>{JSON.stringify(data)}</p>
       </div>
     </>
