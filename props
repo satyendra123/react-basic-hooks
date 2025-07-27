@@ -97,7 +97,7 @@ export default App;
 
 Note- isme to hum simply kya kar rhe the ki hume data send karna tha parents se child me to hum direct aise send kar sakte hai. lekin man lo ki mujhe siblings me data send karna hai to uske liye kya approach hai
 so uske liye hum use karte hai stateup. means pahle hum us data ko pahle app.js tak pahuchanyenge aur usme bad me hum us data ko dusre child me bhejnge. so man lo hume Student.jsx se data ko send karna hai Teacher.js me to hume
-App.js me ek state banana hoga aur us state ki madad se hum us data ko chld wale me send karenge
+App.js me ek state banana hoga aur us state ki madad se hum us data ko child wale me send karenge
 
 a) App.js
 import Student from "./Components/Student.js";
@@ -161,4 +161,59 @@ export default Teacher;
 Note- so basically hum ek state banate hai aur jo humara function hota hai use hum send karte hai jaha se hume data send karna rhta hai jaise ki abhi hume student me se data send karna hai
 to usme jakar useEffect lagakar us function me data ko pass kara denge so isse ye hoga ki humara variable bhi update ho jayega App.js me is function ki wajah se aur hum is variable ko Teacher.js me send kar denge
 
+Ex-3 sending the data from the parents to grand child. like sending the data from principal to teacher and from teacher to student
+a) App.js
+import Principal from "./Components/Principal.js";
+const App = () => {
+  return (
+    <>
+      <h1>sharing data from grand parent to child</h1>
+      <Principal />
+    </>
+  );
+};
+export default App;
 
+b)Principal.js
+import Teacher from "./Teachers.js";
+const Principal = () => {
+  const newdata = {
+    name: "Satyendra",
+    age: "26",
+    grade: "A",
+  };
+  return (
+    <>
+      <Teacher data={newdata} />
+    </>
+  );
+};
+export default Principal;
+
+c) Teacher.js
+// New file: /Components/Teachers.js
+import Student from "./Student.js";
+const Teachers = ({ data }) => {
+  return (
+    <>
+      <p>Principal send this data to teacher</p>
+      <p>{JSON.stringify(data)}</p>
+      <Student data={data} />
+    </>
+  );
+};
+export default Teachers;
+
+d)Student.js
+// New file: /Components/Student.js
+const Student = ({ data }) => {
+  return (
+    <>
+      <p>Teacher send this data to the student</p>
+      <p>{JSON.stringify(data)}</p>
+    </>
+  );
+};
+export default Student;
+
+Note- and it is working. but this is not the best approach to do so. so i will simply use the useContext api for sharing the complex data
