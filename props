@@ -26,3 +26,63 @@ const App = () =>{
     )
 }
 export default App
+
+
+EX-2
+// New file: /Components/Student.js
+const Student = ({ data }) => {
+  return (
+    <>
+      <h1>Hello how are you</h1>
+      {Object.entries(data).map(([key, value], index) => (
+        <p key={index}>
+          {key}: {value}
+        </p>
+      ))}
+    </>
+  );
+};
+export default Student;
+
+a)
+// Teacher.js
+const Teacher = () => {
+  return (
+    <>
+      <h1>kya kar rha hai be</h1>
+    </>
+  );
+};
+export default Teacher;
+
+b) App.js
+import Student from "../Components/Student.js";
+import Teacher from "../Components/Teacher.js";
+
+const data = {
+  name: "satyendra",
+  class: "5th",
+};
+
+const App = () => {
+  return (
+    <>
+      <Student data={data} />
+      <Teacher />
+    </>
+  );
+};
+
+export default App;
+
+c) Student.js
+const App = () => {
+  return (
+    <>
+      <Student data={data} />
+      <Teacher />
+    </>
+  );
+};
+
+export default App;
