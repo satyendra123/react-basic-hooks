@@ -217,3 +217,61 @@ const Student = ({ data }) => {
 export default Student;
 
 Note- and it is working. but this is not the best approach to do so. so i will simply use the useContext api for sharing the complex data
+a) Button.js
+
+import { useState } from "react";
+const Button = ({ newdata }) => {
+  const [data, setData] = useState(0);
+
+  const handleincrement = () => {
+    const updated = data + 1;
+    setData(updated);
+    newdata(updated); // sync to App
+  };
+
+  const handledecrement = () => {
+    const updated = data - 1;
+    setData(updated);
+    newdata(updated); // sync to App
+  };
+
+  return (
+    <>
+      <button onClick={handleincrement}>+</button>
+      <input type="text" value={data} readOnly />
+      <button onClick={handledecrement}>-</button>
+    </>
+  );
+};
+
+export default Button;
+
+b) Navbar.js
+const Navbar = ({ updateddata }) => {
+  return (
+    <>
+      <p>Count is {updateddata}</p>
+      <h1>This is my Navbar</h1>
+    </>
+  );
+};
+export default Navbar;
+
+c) App.js
+import { useState } from "react";
+import Navbar from "./Components/Navbar.js";
+import Button from "./Components/Button.js";
+
+const App = () => {
+  const [data, setData] = useState(0);
+
+  return (
+    <>
+      <Navbar updateddata={data} />
+      <h1>Hello</h1>
+      <Button newdata={setData} />
+    </>
+  );
+};
+
+export default App;
