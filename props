@@ -216,11 +216,13 @@ const Student = ({ data }) => {
 };
 export default Student;
 
-Note- and it is working. but this is not the best approach to do so. so i will simply use the useContext api for sharing the complex data
-in this i have made the increment button and decrement button for updating the count.
+Note- and it is working. but this is not the best approach to do so. so i will simply passing the data from the button to App.jsx and from the App.jsx to the Navbar.jsx. 
+in this i have made the increment button and decrement button for updating the count. in this i am sending the data from the bottom to top to just display the 
+count value whose value is updating by clicking on the increment and decrement button
 a) Button.js
 
 import { useState } from "react";
+
 const Button = ({ newdata }) => {
   const [data, setData] = useState(0);
 
@@ -247,6 +249,7 @@ const Button = ({ newdata }) => {
 
 export default Button;
 
+
 b) Navbar.js
 const Navbar = ({ updateddata }) => {
   return (
@@ -257,6 +260,7 @@ const Navbar = ({ updateddata }) => {
   );
 };
 export default Navbar;
+
 
 c) App.js
 import { useState } from "react";
