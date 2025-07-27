@@ -217,6 +217,7 @@ const Student = ({ data }) => {
 export default Student;
 
 Note- and it is working. but this is not the best approach to do so. so i will simply use the useContext api for sharing the complex data
+in this i have made the increment button and decrement button for updating the count.
 a) Button.js
 
 import { useState } from "react";
