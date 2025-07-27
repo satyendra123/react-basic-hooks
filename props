@@ -3,7 +3,7 @@ props = > when react sees an element representing a user defined component, it p
 
 import React from 'react';
 
-const Student = (data) =>{
+const Student = (data) =>{       // humne isme (data) likha hai 
   return(
     <>
       <div>
@@ -27,6 +27,10 @@ const App = () =>{
 }
 export default App
 
+Note- isme ek notice karne wala chiz ye hai ki humne student me (data)  likha hai ({data}) aise nahi likha hai kyu. (data) iska matlab ye hai ki pura ka pura object isme aa gya hai
+aur agar hum ({data}) likhenge to iska matlab ye hai ki hum destructure kar rhe hai apne ki ko aur aisa hum tb krenge jab hum App.js me data send karenge kuch is tarah se 
+<Student data={name="satyendra" roll="121" grade="5th" city="Madhaya Pradesh"} /> yaaa phir <Student data={newdata} /> iska matlab ye hai ki hum key send kar rhe hai to hume destructure kar lenge ({data}) is tarah se
+waise ye jaruri nahi hai kyuki (data) aise bhi receive kar sakte hai lekin us case me hume yaha data milega data= {data={name="satyendra" roll="121" grade="5th" city="Madhaya Pradesh"}}  so hume extract karte samay data.data.name aise likhna hoga
 
 EX-2
 // New file: /Components/Student.js
@@ -86,3 +90,5 @@ const App = () => {
 };
 
 export default App;
+
+Note- isme to hum simply kya kar rhe the ki hume data send karna tha 
