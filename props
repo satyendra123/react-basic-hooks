@@ -20,9 +20,9 @@ const App = () =>{
       <div>
         <h1>this is my main App.js</h1>
         <h1>this wll be run first</h1>
-        <Student name="satyendra" roll="121" grade="5th" city="Madhaya Pradesh" />
-      </div>
-    </>
+        <Student name="satyendra" roll="121" grade="5th" city="Madhaya Pradesh" />    yaha dhyan dijiyega yaha humne naa comma lgaya hai direct aise jab hum likhte hai to {} object banakar nahi send karte hai
+      </div>                                                                           means agar hum is tarah se likhenge to <Student {name="satyendra" roll="121" grade="5th" city="Madhaya Pradesh"} /> ye error show krega
+    </>                                                                                agar aapko object banakar hi karna hai to aap pahle bana lenge newdata={name:"satyendra", roll:"121" ,grade:"5th" ,city:"Madhaya Pradesh} aur <Student data={newdata}/>
     )
 }
 export default App
