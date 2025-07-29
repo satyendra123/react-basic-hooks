@@ -280,3 +280,61 @@ const App = () => {
 };
 
 export default App;
+
+Ex-5 in this we are checking how the lift the state up for sending the data from child to parent
+// a) New file: /Components/Count.js
+import { useState } from "react";
+const Count = ({ data, newdata }) => {
+  const handleincrement = () => {
+    newdata(data + 1);
+  };
+
+  const handledecrement = () => {
+    newdata(data - 1);
+  };
+  return (
+    <>
+      <button onClick={handleincrement}>+</button>
+      <button>{data}</button>
+      <button onClick={handledecrement}>-</button>
+    </>
+  );
+};
+export default Count;
+
+b) New file: /Components/Navbar.js
+const Navbar = () => {
+  return (
+    <>
+      <h1>Hello i am navbar</h1>
+    </>
+  );
+};
+export default Navbar;
+
+c) // New file: /Components/UpdatedValue.js
+const UpdatedValue = ({ data }) => {
+  return (
+    <>
+      <h1>the update value is {data}</h1>
+    </>
+  );
+};
+export default UpdatedValue;
+
+d) App.js
+import Count from "./Components/Count.js";
+import Navbar from "./Components/Navbar.js";
+import UpdatedValue from "./Components/UpdatedValue.js";
+import { useState } from "react";
+const App = () => {
+  const [updateddata, setUpdatedData] = useState(0);
+  return (
+    <>
+      <UpdatedValue data={updateddata} />
+      <Navbar />
+      <Count data={updateddata} newdata={setUpdatedData} />
+    </>
+  );
+};
+export default App;
