@@ -1,0 +1,33 @@
+const App = () => {
+  studentData = [
+    { name: "satyendra", age: 26, marks: 75 },
+    { name: "sandhya", age: 22, marks: 85 },
+    { name: "rahul", age: 56, marks: 67 },
+    { name: "sidharth", age: 36, marks: 56 },
+  ];
+  return (
+    <>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Marks</th>
+            <th>City</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {studentData.map((student, index) => (
+            <tr key={index}>
+              <td>{student.name}</td>
+              <td>{student.age}</td>
+              <td>{student.marks}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  );
+};
+export default App;
