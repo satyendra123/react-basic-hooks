@@ -54,3 +54,67 @@ const App = () => {
 export default App;
 
 Note-2 hum isko dynamic bana rhe hai ek input box ke sath
+
+import React, { useState } from "react";
+const App = () => {
+  const [search, setSearch] = useState("");
+  const studentdata = [
+    { name: "satyendra", age: 25, marks: 78, price: 600 },
+    { name: "sandhya", age: 35, marks: 82, price: 1800 },
+    { name: "vikas", age: 25, marks: 56, price: 1200 },
+    { name: "dhruv", age: 22, marks: 65, price: 4200 },
+    { name: "neta", age: 28, marks: 48, price: 1900 },
+  ];
+  const currentDate = new Date().toLocaleDateString();
+
+  const currentTime = new Date().toLocaleTimeString();
+
+  const filterdata = studentdata.filter((student) =>
+    student.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const handlefilter = (e) => {
+    data = e.target.value;
+    setSearch(data);
+  };
+  return (
+    <>
+      <h1>My data</h1>
+      <table>
+        <thead>
+          <tr>
+            <td>index</td>
+            <td>name</td>
+            <td>age</td>
+            <td>marks</td>
+            <td>price</td>
+            <td>modifiedprice</td>
+            <td>Date</td>
+            <td>time</td>
+          </tr>
+        </thead>
+        <tbody>
+          {studentdata.map((student, index) => (
+            <tr key={index}>
+              <td>{index}</td>
+              <td>{student.name}</td>
+              <td>{student.age}</td>
+              <td>{student.marks}</td>
+              <td>{student.price}</td>
+              <td>{student.price}</td>
+              <td>{currentDate}</td>
+              <td>{currentTime}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <br />
+
+      <input type="text" onChange={handlefilter} />
+      <p>{search}</p>
+      <p>{JSON.stringify(filterdata)}</p>
+    </>
+  );
+};
+export default App;
+
