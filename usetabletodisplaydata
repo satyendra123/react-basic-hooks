@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 const App = () => {
   const studentdata = [
-    { name: "satyendra", age: 25, marks: 78 },
-    { name: "sandhya", age: 35, marks: 82 },
-    { name: "vikas", age: 25, marks: 56 },
-    { name: "dhruv", age: 22, marks: 65 },
-    { name: "neta", age: 28, marks: 48 },
+    { name: "satyendra", age: 25, marks: 78, price: 600 },
+    { name: "sandhya", age: 35, marks: 82, price: 1800 },
+    { name: "vikas", age: 25, marks: 56, price: 1200 },
+    { name: "dhruv", age: 22, marks: 65, price: 4200 },
+    { name: "neta", age: 28, marks: 48, price: 1900 },
   ];
   const currentDate = new Date().toLocaleDateString();
 
   const currentTime = new Date().toLocaleTimeString();
+
+  const filterdata = studentdata.filter((student) => {
+    return student.price == 1200;
+  });
 
   return (
     <>
@@ -21,6 +25,8 @@ const App = () => {
             <td>name</td>
             <td>age</td>
             <td>marks</td>
+            <td>price</td>
+            <td>modifiedprice</td>
             <td>Date</td>
             <td>time</td>
           </tr>
@@ -32,12 +38,15 @@ const App = () => {
               <td>{student.name}</td>
               <td>{student.age}</td>
               <td>{student.marks}</td>
+              <td>{student.price}</td>
+              <td>{student.price}</td>
               <td>{currentDate}</td>
               <td>{currentTime}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      <p>{JSON.stringify(filterdata)}</p>
     </>
   );
 };
