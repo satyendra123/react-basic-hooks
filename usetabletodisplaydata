@@ -1,3 +1,4 @@
+Note 1- isme kya ho rha hai ki hum static price ko filter kar rhe hai. lekin hum chahte hai ki ek humare pass input text box ho aur mai usme jo bhi likhu uske hisab se data filter hokar dikhayi de
 import React, { useState } from "react";
 const App = () => {
   const studentdata = [
@@ -51,3 +52,5 @@ const App = () => {
   );
 };
 export default App;
+
+Note-2 hum isko dynamic bana rhe hai ek input box ke sath
