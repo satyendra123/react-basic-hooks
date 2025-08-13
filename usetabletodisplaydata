@@ -1,28 +1,39 @@
+import React, { useState } from "react";
 const App = () => {
-  studentData = [
-    { name: "satyendra", age: 26, marks: 75 },
-    { name: "sandhya", age: 22, marks: 85 },
-    { name: "rahul", age: 56, marks: 67 },
-    { name: "sidharth", age: 36, marks: 56 },
+  const studentdata = [
+    { name: "satyendra", age: 25, marks: 78 },
+    { name: "sandhya", age: 35, marks: 82 },
+    { name: "vikas", age: 25, marks: 56 },
+    { name: "dhruv", age: 22, marks: 65 },
+    { name: "neta", age: 28, marks: 48 },
   ];
+  const currentDate = new Date().toLocaleDateString();
+
+  const currentTime = new Date().toLocaleTimeString();
+
   return (
     <>
+      <h1>My data</h1>
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Marks</th>
-            <th>City</th>
+            <td>index</td>
+            <td>name</td>
+            <td>age</td>
+            <td>marks</td>
+            <td>Date</td>
+            <td>time</td>
           </tr>
         </thead>
-
         <tbody>
-          {studentData.map((student, index) => (
+          {studentdata.map((student, index) => (
             <tr key={index}>
+              <td>{index}</td>
               <td>{student.name}</td>
               <td>{student.age}</td>
               <td>{student.marks}</td>
+              <td>{currentDate}</td>
+              <td>{currentTime}</td>
             </tr>
           ))}
         </tbody>
