@@ -120,8 +120,10 @@ export default App;
 
 3) isme kya hoga ki runtime me record dikhte rahega aur jo bhi hum filter karene kewal wo data dikhega record me se
 import { useState } from "react";
+
 const App = () => {
-  const [data, setData] = useState(" ");
+  const [data, setData] = useState(""); // search text
+
   const StudentData = [
     { name: "satyendra", age: 25, subject: "Math", marks: 100, gotmarks: 80 },
     { name: "sandhya", age: 26, subject: "english", marks: 100, gotmarks: 70 },
@@ -131,43 +133,54 @@ const App = () => {
   ];
 
   const handlesearch = (e) => {
-    name = e.target.value;
-    setData(name);
+    setData(e.target.value);
   };
-  
+
+  // filter logic
+  const filterData = StudentData.filter((student) =>
+    student.name.toLowerCase().includes(data.toLowerCase())
+  );
+
   return (
     <>
       <h1>My table data</h1>
 
-      <input type="text" placeholder="filtered out" onChange={handlesearch} />
-      <table>
+      <input
+        type="text"
+        placeholder="Search by name"
+        value={data}
+        onChange={handlesearch}
+      />
+
+      <table border="1" cellPadding="5">
         <thead>
           <tr>
             <th>Name</th>
             <th>Age</th>
-            <th>subject</th>
+            <th>Subject</th>
             <th>Marks</th>
-            <th>obtained</th>
-            <th>percentage</th>
+            <th>Obtained</th>
+            <th>Percentage</th>
           </tr>
         </thead>
 
         <tbody>
-          {StudentData.map((student, index) => (
+          {filterData.map((student, index) => (
             <tr key={index}>
               <td>{student.name}</td>
               <td>{student.age}</td>
               <td>{student.subject}</td>
               <td>{student.marks}</td>
               <td>{student.gotmarks}</td>
-              <td>{(student.gotmarks / student.marks) * 100}%</td>
+              <td>{((student.gotmarks / student.marks) * 100).toFixed(2)}%</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <p>{data}</p>
     </>
   );
 };
+
 export default App;
+
 
