@@ -158,6 +158,8 @@ const App = () => {
             <th>marks</th>
             <th>got marks</th>
             <th>percentage</th>
+            <th>Date</th>
+            <th>Time</th>
           </tr>
         </thead>
 
@@ -170,6 +172,8 @@ const App = () => {
               <td>{student.marks}</td>
               <td>{student.gotmarks}</td>
               <td>{(student.gotmarks / student.marks) * 100}%</td>
+              <td>{new Date().toLocaleDateString()}</td>
+              <td>{new Date().toLocaleTimeString()}</td>
             </tr>
           ))}
         </tbody>
@@ -178,6 +182,7 @@ const App = () => {
   );
 };
 export default App;
+
 
 
 note- abhi isme kya ho rha hai ki agar koi data match nahi karega to pura record show karega aur phir jo data match karega kewal wo wo data show hoga. lekin next me mai chahta hu ki kewal matched data hi show ho means agar koi data match nahi ho rha hai to hume data hi nahi dikhayi de koi sa bhi. 
