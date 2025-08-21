@@ -8,15 +8,21 @@ export default mycontext;
 
 step-2) App.js
 import ChildA from "./Components/ChildA";
+import MyContext from "./Context/mycontext";
+
 const App = () => {
+  const user = { name: "Satyendra", age: 26 };
+
   return (
-    <>
+    <MyContext.Provider value={user}>
       <h1>Context Api</h1>
       <ChildA />
-    </>
+    </MyContext.Provider>
   );
 };
+
 export default App;
+
 
 step-3) Components/ChildA.js
 import ChildB from "./ChildB";
@@ -43,13 +49,22 @@ const ChildB = () => {
 export default ChildB;
 
 step-5) /Components/ChildC.js
+import { useContext } from "react";
+import MyContext from "../Context/mycontext";
+
 const ChildC = () => {
+  const user = useContext(MyContext);
+
   return (
     <>
-      <h1>ChildC</h1>
+      <h2>ChildC</h2>
+      <p>Name: {user.name}</p>
+      <p>Age: {user.age}</p>
     </>
   );
 };
+
 export default ChildC;
+
 
 
