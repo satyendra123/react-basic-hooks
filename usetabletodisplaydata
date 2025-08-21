@@ -122,8 +122,7 @@ export default App;
 import { useState } from "react";
 
 const App = () => {
-  const [data, setData] = useState(""); // search text
-
+  const [data, setData] = useState("");
   const StudentData = [
     { name: "satyendra", age: 25, subject: "Math", marks: 100, gotmarks: 80 },
     { name: "sandhya", age: 26, subject: "english", marks: 100, gotmarks: 70 },
@@ -132,35 +131,33 @@ const App = () => {
     { name: "narmada", age: 29, subject: "geo", marks: 100, gotmarks: 98 },
   ];
 
-  const handlesearch = (e) => {
-    setData(e.target.value);
+  const handleOnChange = (e) => {
+    name = e.target.value;
+    setData(name);
   };
 
-  // filter logic
-  const filterData = StudentData.filter((student) =>
-    student.name.toLowerCase().includes(data.toLowerCase())
-  );
+  const filterData = StudentData.filter((student, index) => {
+    return (
+      student.name.toLowerCase().includes(data.toLowerCase()) ||
+      student.age.toString().includes(data.toLowerCase()) ||
+      student.subject.toLowerCase().includes(data.toLowerCase()) ||
+      student.marks.toString().includes(data.toLowerCase())
+    );
+  });
 
   return (
     <>
-      <h1>My table data</h1>
-
-      <input
-        type="text"
-        placeholder="Search by name"
-        value={data}
-        onChange={handlesearch}
-      />
-
-      <table border="1" cellPadding="5">
+      <h1>My data</h1>
+      <input type="text" onChange={handleOnChange} placeholder="filter text" />
+      <table>
         <thead>
           <tr>
             <th>Name</th>
             <th>Age</th>
-            <th>Subject</th>
-            <th>Marks</th>
-            <th>Obtained</th>
-            <th>Percentage</th>
+            <th>subject</th>
+            <th>marks</th>
+            <th>got marks</th>
+            <th>percentage</th>
           </tr>
         </thead>
 
@@ -172,7 +169,7 @@ const App = () => {
               <td>{student.subject}</td>
               <td>{student.marks}</td>
               <td>{student.gotmarks}</td>
-              <td>{((student.gotmarks / student.marks) * 100).toFixed(2)}%</td>
+              <td>{(student.gotmarks / student.marks) * 100}%</td>
             </tr>
           ))}
         </tbody>
@@ -180,8 +177,8 @@ const App = () => {
     </>
   );
 };
-
 export default App;
+
 
 note- abhi isme kya ho rha hai ki agar koi data match nahi karega to pura record show karega aur phir jo data match karega kewal wo wo data show hoga. lekin next me mai chahta hu ki kewal matched data hi show ho means agar koi data match nahi ho rha hai to hume data hi nahi dikhayi de koi sa bhi. 
 import { useState } from "react";
