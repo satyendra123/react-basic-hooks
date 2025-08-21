@@ -1,0 +1,55 @@
+/Components/ChildA.js: Could not find module in path: './Components/ChildB' relative to '/Components/ChildA.js' (2:0)
+
+step-1) Context/mycontext.js
+// New file: /Context/mycontext.js
+import { createContext } from "react";
+const mycontext = createContext();
+export default mycontext;
+
+step-2) App.js
+import ChildA from "./Components/ChildA";
+const App = () => {
+  return (
+    <>
+      <h1>Context Api</h1>
+      <ChildA />
+    </>
+  );
+};
+export default App;
+
+step-3) Components/ChildA.js
+import ChildB from "./ChildB";
+const ChildA = () => {
+  return (
+    <>
+      <h1>ChildB</h1>
+      <ChildB />
+    </>
+  );
+};
+export default ChildA;
+
+step-4)  Components/ChildB.js
+import ChildC from "./ChildC";
+const ChildB = () => {
+  return (
+    <>
+      <h1>ChildC</h1>
+      <ChildC />
+    </>
+  );
+};
+export default ChildB;
+
+step-5) /Components/ChildC.js
+const ChildC = () => {
+  return (
+    <>
+      <h1>ChildC</h1>
+    </>
+  );
+};
+export default ChildC;
+
+
