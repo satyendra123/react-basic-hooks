@@ -255,8 +255,57 @@ const App = () => {
 
 export default App;
 
+EX-2 i want that i only display the three data instead of showing all. so i will use the slice method
+import { useState } from "react";
+const App = () => {
+  const StudentData = [
+    { name: "satyendra", age: 23, subject: "math", marks: 80, percentage: 80 },
+    { name: "sandhya", age: 23, subject: "math", marks: 100, percentage: 65 },
+    {name: "abhinav",age: 29,subject: "science",marks: 100,percentage: 70,},
+    { name: "vikas", age: 24, subject: "hindi", marks: 100, percentage: 80 },
+    { name: "prasant", age: 29, subject: "python", marks: 100, percentage: 90 },
+  ];
 
-EX-2 apply the pagination here
+  const pagedata = StudentData.slice(0, 3);
+  return (
+    <>
+      <h1>Table data</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Subject</th>
+            <th>Marks</th>
+            <th>Percentage</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {pagedata.map((student, index) => {
+            return (
+              <tr key={index}>
+                <td>{student.name}</td>
+                <td>{student.age}</td>
+                <td>{student.subject}</td>
+                <td>{student.marks}</td>
+                <td>{student.percentage}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <div>
+        <button>prev</button>
+        <span>1</span>
+        <button>next</button>
+      </div>
+    </>
+  );
+};
+export default App;
+
+EX-3 apply the pagination here
 import { useState } from "react";
 
 const App = () => {
