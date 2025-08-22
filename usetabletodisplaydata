@@ -327,17 +327,21 @@ const App = () => {
   const currentData = StudentData.slice(startIndex, endIndex); //iska use hum array ke data ko slice karne ke liye karte hai. ki kaha se kaha tak hum array ke data ko slice kar de
 
   const goToNext = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    if (currentPage < totalPages){
+setCurrentPage(currentPage + 1);
+}
   };
 
   const goToPrev = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
+    if (currentPage > 1){
+setCurrentPage(currentPage - 1);
+}
   };
 
   return (
     <>
       <h1>Table data</h1>
-      <table border="1" cellPadding="8">
+      <table>
         <thead>
           <tr>
             <th>Name</th>
@@ -363,15 +367,9 @@ const App = () => {
 
       {/* Pagination Controls */}
       <div style={{ marginTop: "10px" }}>
-        <button onClick={goToPrev} disabled={currentPage === 1}>
-          Prev
-        </button>
-        <span style={{ margin: "0 10px" }}>
-          Page {currentPage} of {totalPages}
-        </span>
-        <button onClick={goToNext} disabled={currentPage === totalPages}>
-          Next
-        </button>
+        <button onClick={goToPrev} disabled={currentPage === 1}>Prev</button>
+        <span style={{ margin: "0 10px" }}>Page {currentPage} of {totalPages}</span>
+        <button onClick={goToNext} disabled={currentPage === totalPages}>Next</button>
       </div>
     </>
   );
