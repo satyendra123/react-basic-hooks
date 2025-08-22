@@ -321,18 +321,11 @@ const App = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 3;
-
-  // total pages
-  const totalPages = Math.ceil(StudentData.length / rowsPerPage);
-
-  // calculate start & end index
-  const startIndex = (currentPage - 1) * rowsPerPage;
+  const totalPages = Math.ceil(StudentData.length / rowsPerPage); 
+  const startIndex = (currentPage - 1) * rowsPerPage; // jab page number 2 me jayenge man lo to array ka kaon se index se kaon se index tak ka data dikhna chahiye
   const endIndex = startIndex + rowsPerPage;
+  const currentData = StudentData.slice(startIndex, endIndex); //iska use hum array ke data ko slice karne ke liye karte hai. ki kaha se kaha tak hum array ke data ko slice kar de
 
-  // slice data for current page
-  const currentData = StudentData.slice(startIndex, endIndex);
-
-  // handlers
   const goToNext = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
