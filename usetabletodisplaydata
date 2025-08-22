@@ -255,3 +255,84 @@ const App = () => {
 
 export default App;
 
+
+EX-2 apply the pagination here
+import { useState } from "react";
+
+const App = () => {
+  const StudentData = [
+    { name: "satyendra", age: 23, subject: "math", marks: 80, percentage: 80 },
+    { name: "sandhya", age: 23, subject: "math", marks: 100, percentage: 65 },
+    { name: "abhinav", age: 29, subject: "science", marks: 100, percentage: 70 },
+    { name: "vikas", age: 24, subject: "hindi", marks: 100, percentage: 80 },
+    { name: "prasant", age: 29, subject: "python", marks: 100, percentage: 90 },
+    { name: "rahul", age: 22, subject: "english", marks: 95, percentage: 85 },
+    { name: "nisha", age: 25, subject: "biology", marks: 88, percentage: 78 },
+  ];
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 3;
+
+  // total pages
+  const totalPages = Math.ceil(StudentData.length / rowsPerPage);
+
+  // calculate start & end index
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+
+  // slice data for current page
+  const currentData = StudentData.slice(startIndex, endIndex);
+
+  // handlers
+  const goToNext = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const goToPrev = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  return (
+    <>
+      <h1>Table data</h1>
+      <table border="1" cellPadding="8">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Subject</th>
+            <th>Marks</th>
+            <th>Percentage</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {currentData.map((student, index) => (
+            <tr key={index}>
+              <td>{student.name}</td>
+              <td>{student.age}</td>
+              <td>{student.subject}</td>
+              <td>{student.marks}</td>
+              <td>{student.percentage}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Pagination Controls */}
+      <div style={{ marginTop: "10px" }}>
+        <button onClick={goToPrev} disabled={currentPage === 1}>
+          Prev
+        </button>
+        <span style={{ margin: "0 10px" }}>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button onClick={goToNext} disabled={currentPage === totalPages}>
+          Next
+        </button>
+      </div>
+    </>
+  );
+};
+
+export default App;
