@@ -1,3 +1,5 @@
+EX-1  in this app.js will share the data with all its child and grandchild. means app.js call the childA and childA is calling childB and childB is calling childC like this way in a hirarchy order. grandparent-parent-child-grandhild like this way data is passing
+
 /Components/ChildA.js: Could not find module in path: './Components/ChildB' relative to '/Components/ChildA.js' (2:0)
 
 step-1) Context/mycontext.js
@@ -67,4 +69,5 @@ const ChildC = () => {
 export default ChildC;
 
 
+Ex-2) in this app.js will share the data with all its child. means all siblings will get the data
 
