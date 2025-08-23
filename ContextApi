@@ -71,3 +71,62 @@ export default ChildC;
 
 Ex-2) in this app.js will share the data with all its child. means all siblings will get the data
 
+a) // New file: /Context/contextdata.js
+import { createContext } from "react";
+const contextdata = createContext();
+export default contextdata;
+
+b)// New file: /Components/childA.js
+import { useContext } from "react";
+import contextdata from "../Context/contextdata";
+const childA = () => {
+  const data = useContext(contextdata);
+  return (
+    <>
+      <h1>ChildA</h1>
+      <p>{data}</p>
+    </>
+  );
+};
+export default childA;
+
+c)// New file: /Components/childB.js
+const childB = () => {
+  return (
+    <>
+      <h1>ChildB</h1>
+    </>
+  );
+};
+export default childB;
+
+d)// New file: /Components/childC.js
+const childC = () => {
+  return (
+    <>
+      <h1>ChildC</h1>
+    </>
+  );
+};
+export default childC;
+
+e) App.js
+-import contextdata from "./Context/contextdata";
+import ChildA from "./Components/childA";
+import ChildB from "./Components/childB";
+import ChildC from "./Components/childC";
+
+const App = () => {
+  const data = "Hello how are you";
+  return (
+    <>
+      <contextdata.Provider value={data}>
+        <ChildA />
+        <ChildB />
+        <ChildC />
+      </contextdata.Provider>
+    </>
+  );
+};
+
+export default App;
