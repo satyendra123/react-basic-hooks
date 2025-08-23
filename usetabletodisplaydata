@@ -255,124 +255,97 @@ const App = () => {
 
 export default App;
 
-EX-2 i want that i only display the three data instead of showing all. so i will use the slice method
+EX-2 apply the pagination here. actually there are some mathematics in this nothing else.
+
+a) rowsperdata = suppose in a single row how many data you want to display so for example we are taking 10
+b) totalpages = Math.ceil(studentData.length/ rowsperdata)  means man lo agar total data 208 hai to aur ek row me 10 data aa rhe hai to kitne pages banenge
+c) firstindex = (currentpage -1) * rowsperdata means man lo ki mai page number 5 me hu to mera first index kaha se start hoga us samay
+d) lastindex = firstindex + rowsperdata
+e) slice method() = studentData.slice(firstindex, lastindex) means mujhe apne array ko kaha se kaha tak kat kar nikalna hai
+f) disabled function = iska use hum karte hai page number ko increase aur decrease karne ke liye ki jab firstpage par koi ho to prev button disable ho jaye aur agar koi lastpage par ho to nextbutton disable ho jaye
+
 import { useState } from "react";
 const App = () => {
   const StudentData = [
-    { name: "satyendra", age: 23, subject: "math", marks: 80, percentage: 80 },
-    { name: "sandhya", age: 23, subject: "math", marks: 100, percentage: 65 },
-    {name: "abhinav",age: 29,subject: "science",marks: 100,percentage: 70,},
-    { name: "vikas", age: 24, subject: "hindi", marks: 100, percentage: 80 },
-    { name: "prasant", age: 29, subject: "python", marks: 100, percentage: 90 },
+    { name: "satyendra", age: 45, marks: 50, percent: 45 },
+    { name: "sandhya", age: 54, marks: 60, percent: 59 },
+    { name: "krish", age: 89, marks: 70, percent: 32 },
+    { name: "nishi", age: 67, marks: 80, percent: 67 },
+    { name: "pushpa", age: 54, marks: 90, percent: 65 },
   ];
 
-  const pagedata = StudentData.slice(0, 3);
+  const [currentpage, setcurrentpage] = useState(1);
+  const rowsperdata = 3;
+  const totalpages = Math.ceil(StudentData.length / rowsperdata);
+  const firstindex = (currentpage - 1) * rowsperdata;
+  const lastindex = firstindex + rowsperdata;
+  const [searchdata, setsearchdata] = useState("");
+
+  const filterdata = (e) => {
+    const name = e.target.value;
+    setsearchdata(name);
+  };
+
+  const rowsdata = StudentData.slice(firstindex, lastindex);
+  const updatedata = StudentData.filter((student, index) => {
+    return (
+      student.name.toLowerCase().includes(searchdata.toLowerCase()) ||
+      student.age.toString().includes(searchdata.toLowerCase())
+    );
+  });
+
+  const handleprev = () => {
+    setcurrentpage(currentpage - 1);
+  };
+
+  const handlenext = () => {
+    setcurrentpage(currentpage + 1);
+  };
   return (
     <>
       <h1>Table data</h1>
+      <input
+        type="text"
+        name="search"
+        placeholder="filter data"
+        onChange={filterdata}
+      />
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Subject</th>
-            <th>Marks</th>
-            <th>Percentage</th>
+            <th>name</th>
+            <th>age</th>
+            <th>marks</th>
+            <th>percent</th>
           </tr>
         </thead>
 
         <tbody>
-          {pagedata.map((student, index) => {
+          {rowsdata.map((student, index) => {
             return (
               <tr key={index}>
                 <td>{student.name}</td>
                 <td>{student.age}</td>
-                <td>{student.subject}</td>
                 <td>{student.marks}</td>
-                <td>{student.percentage}</td>
+                <td>{student.percent}%</td>
               </tr>
             );
           })}
         </tbody>
       </table>
       <div>
-        <button>prev</button>
-        <span>1</span>
-        <button>next</button>
+        <button onClick={handleprev} disabled={currentpage === 1}>
+          prev
+        </button>
+        <span>
+          {currentpage} of {totalpages}
+        </span>
+        <button onClick={handlenext} disabled={currentpage === totalpages}>
+          next
+        </button>
       </div>
     </>
   );
 };
 export default App;
 
-EX-3 apply the pagination here
-import { useState } from "react";
-
-const App = () => {
-  const StudentData = [
-    { name: "satyendra", age: 23, subject: "math", marks: 80, percentage: 80 },
-    { name: "sandhya", age: 23, subject: "math", marks: 100, percentage: 65 },
-    { name: "abhinav", age: 29, subject: "science", marks: 100, percentage: 70 },
-    { name: "vikas", age: 24, subject: "hindi", marks: 100, percentage: 80 },
-    { name: "prasant", age: 29, subject: "python", marks: 100, percentage: 90 },
-    { name: "rahul", age: 22, subject: "english", marks: 95, percentage: 85 },
-    { name: "nisha", age: 25, subject: "biology", marks: 88, percentage: 78 },
-  ];
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 3;
-  const totalPages = Math.ceil(StudentData.length / rowsPerPage); 
-  const startIndex = (currentPage - 1) * rowsPerPage; // jab page number 2 me jayenge man lo to array ka kaon se index se kaon se index tak ka data dikhna chahiye
-  const endIndex = startIndex + rowsPerPage;
-  const currentData = StudentData.slice(startIndex, endIndex); //iska use hum array ke data ko slice karne ke liye karte hai. ki kaha se kaha tak hum array ke data ko slice kar de
-
-  const goToNext = () => {
-    if (currentPage < totalPages){
-setCurrentPage(currentPage + 1);
-}
-  };
-
-  const goToPrev = () => {
-    if (currentPage > 1){
-setCurrentPage(currentPage - 1);
-}
-  };
-
-  return (
-    <>
-      <h1>Table data</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Subject</th>
-            <th>Marks</th>
-            <th>Percentage</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {currentData.map((student, index) => (
-            <tr key={index}>
-              <td>{student.name}</td>
-              <td>{student.age}</td>
-              <td>{student.subject}</td>
-              <td>{student.marks}</td>
-              <td>{student.percentage}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Pagination Controls */}
-      <div style={{ marginTop: "10px" }}>
-        <button onClick={goToPrev} disabled={currentPage === 1}>Prev</button>
-        <span style={{ margin: "0 10px" }}>Page {currentPage} of {totalPages}</span>
-        <button onClick={goToNext} disabled={currentPage === totalPages}>Next</button>
-      </div>
-    </>
-  );
-};
-
-export default App;
