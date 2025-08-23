@@ -1,0 +1,73 @@
+import { useState } from "react";
+const App = () => {
+  const [formdata, setformData] = useState({
+    username: "",
+    age: "",
+    subject: "",
+    marks: "",
+    address: "",
+  });
+
+  const handleOnChange = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    setformData({ ...formdata, [name]: value });
+
+    if(name=="age"){
+      
+    }
+
+    else if (name="marks")
+  };
+
+  const handlesubmit = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <>
+      <h1>form data</h1>
+      <form onSubmit={handlesubmit}>
+        <div>
+          <input
+            type="text"
+            placeholder="enter your name"
+            name="username"
+            onChange={handleOnChange}
+            value={formdata.name}
+          />
+          <input
+            type="text"
+            placeholder="enter your age"
+            name="age"
+            onChange={handleOnChange}
+            value={formdata.age}
+          />
+          <input
+            type="text"
+            placeholder="enter your subject"
+            name="subject"
+            onChange={handleOnChange}
+            value={formdata.subject}
+          />
+          <input
+            type="text"
+            placeholder="enter your marks"
+            name="marks"
+            onChange={handleOnChange}
+            value={formdata.marks}
+          />
+          <input
+            type="text"
+            placeholder="enter your address"
+            name="address"
+            onChange={handleOnChange}
+            value={formdata.address}
+          />
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </>
+  );
+};
+export default App;
