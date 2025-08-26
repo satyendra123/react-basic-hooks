@@ -1,0 +1,41 @@
+useMemo hook() => iska use hum karte hai optimization ke liye. bekar ke rendering ko rokne ke liye. suppose karo ki bar bar koi same computation hume perform karna hai to bar bar rendering hoga.
+so is chiz ko hum usememo se perform kar sakte hai. usememo apne cache me us value ko store kar leta hai. aur jab tak wo value change nahi hota hai yaa koi new value nahi aata hai tb tk ye us chiz ko render nahi karwate hai
+
+Ex-1) so is case me hum samjh rhe hai ki aakhir me problem kya hai. actually problem ye hai ki 
+a) App.js
+import NameComponent from "./Components/NameComponent";
+import ResultComponent from "./Components/ResultComponent";
+const App = () => {
+  return (
+    <>
+      <NameComponent name="satyendra" age={25} />
+      <ResultComponent marks={56} />
+    </>
+  );
+};
+export default App;
+
+b) New file: /Components/NameComponent.js
+const NameComponent = ({ name, age }) => {
+  console.log("inside name component");
+  return (
+    <>
+      <h1>name component</h1>
+      <p>My name is: {name}</p>
+      <p>My age is: {age}</p>
+    </>
+  );
+};
+export default NameComponent;
+
+c) New file: /Components/ResultComponent.js
+const ResultComponent = ({ marks }) => {
+  console.log("result component");
+  return (
+    <>
+      <h1>Result component</h1>
+      <p>my marks: {marks}</p>
+    </>
+  );
+};
+export default ResultComponent;
