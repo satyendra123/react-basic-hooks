@@ -41,3 +41,5 @@ const ResultComponent = ({ marks }) => {
   );
 };
 export default ResultComponent;
+
+Note- so is chiz se bachne ke liye hum React.memo(ResultComponent) aur React.memo(NameComponent) dono components me aisa karne par jo sa data update hoga kewal wahi wala component render karega
