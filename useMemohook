@@ -1,7 +1,9 @@
 useMemo hook() => iska use hum karte hai optimization ke liye. bekar ke rendering ko rokne ke liye. suppose karo ki bar bar koi same computation hume perform karna hai to bar bar rendering hoga.
 so is chiz ko hum usememo se perform kar sakte hai. usememo apne cache me us value ko store kar leta hai. aur jab tak wo value change nahi hota hai yaa koi new value nahi aata hai tb tk ye us chiz ko render nahi karwate hai
 
-Ex-1) so is case me hum samjh rhe hai ki aakhir me problem kya hai. actually problem ye hai ki 
+Ex-1) So is case me hum samjh rhe hai ki aakhir me problem kya hai. actually problem ye hai ki jab hum app.js me jakar kewal marks ko change kare to bhi hum console me dekhenge ki result component to render ho hi rha hai sath me
+NameComponent bhi render hota hai. so par aisa hona nahi chahiye.
+
 a) App.js
 import NameComponent from "./Components/NameComponent";
 import ResultComponent from "./Components/ResultComponent";
