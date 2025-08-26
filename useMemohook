@@ -42,4 +42,44 @@ const ResultComponent = ({ marks }) => {
 };
 export default ResultComponent;
 
-Note- so is chiz se bachne ke liye hum React.memo(ResultComponent) aur React.memo(NameComponent) dono components me aisa karne par jo sa data update hoga kewal wahi wala component render karega
+Note- so is chiz se bachne ke liye hum React.memo(ResultComponent) aur React.memo(NameComponent) dono components me aisa karne par jo sa data update hoga kewal wahi wala component render karega kuch is tarah se
+
+a) App.js
+import NameComponent from "./Components/NameComponent";
+import ResultComponent from "./Components/ResultComponent";
+const App = () => {
+  return (
+    <>
+      <NameComponent name="satyendra" age={25} />
+      <ResultComponent marks={56} />
+    </>
+  );
+};
+export default App;
+
+b) // New file: /Components/NameComponent.js
+import React from "react";
+const NameComponent = ({ name, age }) => {
+  console.log("inside name component");
+  return (
+    <>
+      <h1>name component</h1>
+      <p>My name is: {name}</p>
+      <p>My age is: {age}</p>
+    </>
+  );
+};
+export default React.memo(NameComponent);
+
+c) // New file: /Components/ResultComponent.js
+import React from "react";
+const ResultComponent = ({ marks }) => {
+  console.log("result component");
+  return (
+    <>
+      <h1>Result component</h1>
+      <p>my marks: {marks}</p>
+    </>
+  );
+};
+export default React.memo(ResultComponent);
