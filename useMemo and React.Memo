@@ -89,3 +89,34 @@ ek counter bana leta hu kyuki jaise hi couter ki value update hogi to app.jsx jo
 ab maine do components banaye hai withoutMemoization and withMemoization. so in the withoutMemoization me hum dekhenge ki jab jab counter ki value increase hogi means parent render hoga 
 to mera child to render hoga hi sath me jo uski computation hai console.log('Processing items...'); yah bhi print hogi kyuki wo har bar chalega same data ke liye bhi. lekin agar hum 
 withMemoization ke sath data pass karte hai to aisa nahi hota hai. means jab tak item change nahi hoga means different value nahi hoga wo run nahi krega aur jaise hi input me kuch changes hoga to wo print kar dega
+
+note- agar mai chahta hu ki same props ke liye mera child withMemoization jo hai wo bhi render na ho to hum React.Memo se apne sare component me band kar denge kuch is tarah se. isse agar parent render hota bhi hai to child component render nahi hoga
+
+WithMemoization.jsx
+
+import React, {useMemo} from 'react';
+
+{/* Using useMemo to memoize the processed items */}
+
+const Memoization = React.memo(({ items }) => {
+  console.log('Memoization component rendered');
+
+  const processedItems = useMemo(() => {
+    console.log('Processing items...');
+    return processItems(items);
+  }, [items]);
+
+  return (
+    <ul>
+      {processedItems.map(item => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </ul>
+  );
+})
+
+const processItems = (items) => {
+  return items.map(item => ({ id: item.id, name: item.name.toUpperCase() }));
+};
+
+export default Memoization;
