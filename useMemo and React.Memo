@@ -1,0 +1,91 @@
+a) Withoutmemoization.jsx
+
+import React, {useMemo} from 'react';
+
+{/* Using useMemo to memoize the processed items */}
+
+const Memoization = ({ items }) => {
+  console.log('Memoization component rendered');
+  console.log('Processing items...');
+  const processedItems = processItems(items);
+
+  return (
+    <ul>
+      {processedItems.map(item => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </ul>
+  );
+}
+
+const processItems = (items) => {
+  return items.map(item => ({ id: item.id, name: item.name.toUpperCase() }));
+};
+
+export default Memoization;
+
+b) WithMemoization.jsx
+
+import React, {useMemo} from 'react';
+
+{/* Using useMemo to memoize the processed items */}
+
+const Memoization = ({ items }) => {
+  console.log('Memoization component rendered');
+
+  const processedItems = useMemo(() => {
+    console.log('Processing items...');
+    return processItems(items);
+  }, [items]);
+
+  return (
+    <ul>
+      {processedItems.map(item => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </ul>
+  );
+}
+
+const processItems = (items) => {
+  return items.map(item => ({ id: item.id, name: item.name.toUpperCase() }));
+};
+
+export default Memoization;
+
+c) App.jsx
+import React, { useState } from 'react'
+import Withoutmemoization from './Components/Withoutmemoization.jsx'
+import WithMemoization from './Components/WithMemoization.jsx'
+import { Typewriter } from 'react-simple-typewriter';
+const data = [
+  { id: 1, name: 'item1' },
+  { id: 2, name: 'item2' },
+  { id: 3, name: 'item3' },
+  { id: 4, name: 'item4' },
+  { id: 5, name: 'item5' },
+  { id: 6, name: 'item6' },
+  { id: 7, name: 'item7' },
+]
+
+const App = () => {
+  const [count, setCount] = useState(0)
+
+  console.log('App rendered')
+
+  return (
+    <>
+      <button className="text-white bg-blue-500 px-4 py-2"onClick={() => setCount(count + 1)}>Increment ({count})</button>
+      <Withoutmemoization items={data} />
+      <WithMemoization items={data} />
+    </>
+  )
+}
+
+export default App
+
+Note- so humne do component banaya hai ek to WithMemoization and dusra WithoutMemoization and App.jsx me humne ek data name ka object banaya hai jisme kuch static data hai. ab mai
+ek counter bana leta hu kyuki jaise hi couter ki value update hogi to app.jsx jo hai render hoga aur uske jo child hai wo bhi render honge. so yaha tak to hum pahle se jante hai.
+ab maine do components banaye hai withoutMemoization and withMemoization. so in the withoutMemoization me hum dekhenge ki jab jab counter ki value increase hogi means parent render hoga 
+to mera child to render hoga hi sath me jo uski computation hai console.log('Processing items...'); yah bhi print hogi kyuki wo har bar chalega same data ke liye bhi. lekin agar hum 
+withMemoization ke sath data pass karte hai to aisa nahi hota hai. means jab tak item change nahi hoga means different value nahi hoga wo run nahi krega aur jaise hi input me kuch changes hoga to wo print kar dega
